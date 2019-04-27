@@ -7,6 +7,7 @@ import com.github.kittinunf.fuel.gson.responseObject
 import com.github.kittinunf.result.Result
 import com.natpryce.konfig.*
 import spark.kotlin.*
+import java.io.File
 
 data class AccessTokenResponse(
         val access_token: String,
@@ -43,10 +44,13 @@ fun main(args: Array<String>) {
         val tokenResponse = getAccessToken(config[api_id], config[api_key], code)
 
         tokenResponse.fold({ value ->
-            val accessToken = value.access_token
             Thread { Thread.sleep(1000); http.stop() }.start()
-            println("Use this access token: $accessToken")
-            "Use this access token: $accessToken"
+            println("Success: Access token and user id written to config file")
+            File("user-info.properties").printWriter().use { out ->
+                out.println("user.id=${value.x_user_id}")
+                out.println("user.token=${value.access_token}")
+            }
+            "Next run the client"
         }, { error ->
             "Error: $error"
         })

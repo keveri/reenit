@@ -10,3 +10,6 @@ reenit.iml
 
 # Ignore API secrets
 src/main/resources/api.properties
+
+# Ignore user config file
+user-info.properties
