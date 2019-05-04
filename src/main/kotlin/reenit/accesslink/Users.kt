@@ -45,6 +45,15 @@ fun register(userInfo: UserInfo): Result<User, FuelError> {
     return result
 }
 
+fun info(userInfo: UserInfo): Result<User, FuelError> {
+    val (_ , response, result) =
+            Fuel.get("https://www.polaraccesslink.com/v3/users/${userInfo.id}")
+                    .appendHeader("Authorization", "Basic ${userInfo.token}")
+                    .appendHeader("Accept", "application/json")
+                    .responseObject<User>()
+    return result
+}
+
 fun delete(userInfo: UserInfo) {
     val (_, response, result) =
             Fuel.delete("https://www.polaraccesslink.com/v3/users/${userInfo.id}")

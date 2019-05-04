@@ -1,5 +1,6 @@
 package reenit.accesslink
 
+import com.github.kittinunf.result.map
 import com.natpryce.konfig.*
 import java.io.File
 
@@ -13,6 +14,9 @@ fun main(args: Array<String>) {
     // 401: old token
     // 200: created
     val userResult = register(userInfo)
+
+    val userInfoResult = info(userInfo)
+    userInfoResult.map { println(it) }
 
     listExercises(userInfo).fold({ value ->
         println("Data:")
