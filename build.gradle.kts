@@ -37,6 +37,12 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    //mainClassName = "reenit.AppKt"
     mainClassName = "reenit.accesslink.ClientKt"
+}
+
+tasks {
+    task("authorize", JavaExec::class) {
+        main = "reenit.AppKt"
+        classpath = sourceSets["main"].runtimeClasspath
+    }
 }
