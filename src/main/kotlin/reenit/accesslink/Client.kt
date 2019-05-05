@@ -13,10 +13,12 @@ fun main(args: Array<String>) {
 
     // 401: old token
     // 200: created
-    val userResult = register(userInfo)
+    //val userResult = register(userInfo)
 
     val userInfoResult = info(userInfo)
     userInfoResult.map { println(it) }
+
+    createTransaction(userInfo).map { println(it) }
 
     listExercises(userInfo).fold({ value ->
         println("Data:")
@@ -26,5 +28,5 @@ fun main(args: Array<String>) {
     })
 
     //204: deleted
-    delete(userInfo)
+    //delete(userInfo)
 }
