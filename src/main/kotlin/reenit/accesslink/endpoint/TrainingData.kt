@@ -1,4 +1,4 @@
-package reenit.accesslink
+package reenit.accesslink.endpoint
 
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.result.Result
