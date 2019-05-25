@@ -7,6 +7,7 @@ import java.io.File
 
 class Client(val userInfo: UserInfo) {
     val user: User = User(userInfo)
+    val trainingData: TrainingData = TrainingData(userInfo)
 }
 
 fun main(args: Array<String>) {
@@ -20,9 +21,9 @@ fun main(args: Array<String>) {
     val userInfoResult = client.user.info()
     userInfoResult.map { println(it) }
 
-    createTransaction(userInfo).map { println(it) }
+    client.trainingData.createTransaction().map { println(it) }
 
-    listExercises(userInfo).fold({ value ->
+    client.trainingData.listExercises().fold({ value ->
         println("Data:")
         println(value.map { it.toString() })
     }, { error ->

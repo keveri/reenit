@@ -52,23 +52,25 @@ data class TransactionLocation(
         val resourceUrl: String
 )
 
-fun createTransaction(userInfo: UserInfo): Result<TransactionLocation, FuelError> {
-    val path = "https://www.polaraccesslink.com/v3/users/${userInfo.id}/exercise-transactions"
-    val (_, response, result) =
-            Fuel.post(path)
-                    .appendHeader("Accept", "application/json;charset=UTF-8")
-                    .appendHeader("Authorization", "Basic ${userInfo.token}")
-                    .responseObject<TransactionLocation>()
-    println(response)
-    return result
-}
+class TrainingData(val userInfo: UserInfo){
+    fun createTransaction(): Result<TransactionLocation, FuelError> {
+        val path = "https://www.polaraccesslink.com/v3/users/${userInfo.id}/exercise-transactions"
+        val (_, response, result) =
+                Fuel.post(path)
+                        .appendHeader("Accept", "application/json;charset=UTF-8")
+                        .appendHeader("Authorization", "Basic ${userInfo.token}")
+                        .responseObject<TransactionLocation>()
+        println(response)
+        return result
+    }
 
-fun listExercises(userInfo: UserInfo): Result<Exercises, FuelError> {
-    val (_, response, result) =
-            Fuel.get("https://www.polaraccesslink.com/v3/exercises")
-                    .appendHeader("Accept", "application/json;charset=UTF-8")
-                    .appendHeader("Authorization", "Basic ${userInfo.token}")
-                    .responseObject<Exercises>()
-    println(response)
-    return result
+    fun listExercises(): Result<Exercises, FuelError> {
+        val (_, response, result) =
+                Fuel.get("https://www.polaraccesslink.com/v3/exercises")
+                        .appendHeader("Accept", "application/json;charset=UTF-8")
+                        .appendHeader("Authorization", "Basic ${userInfo.token}")
+                        .responseObject<Exercises>()
+        println(response)
+        return result
+    }
 }
