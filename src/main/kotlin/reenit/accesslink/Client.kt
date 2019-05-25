@@ -2,8 +2,10 @@ package reenit.accesslink
 
 import com.github.kittinunf.result.map
 import com.natpryce.konfig.*
-import reenit.accesslink.endpoint.*
 import java.io.File
+
+import reenit.accesslink.dataTypes.UserInfo
+import reenit.accesslink.endpoint.*
 
 class Client(val userInfo: UserInfo) {
     val user: User = User(userInfo)

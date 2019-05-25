@@ -4,31 +4,9 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.result.Result
 import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.fuel.gson.responseObject
-import com.google.gson.annotations.SerializedName
 
-data class UserExtraInfoResponse(
-        val value: String,
-        val index: Int,
-        val name: String
-)
-
-data class UserResponse(
-        @SerializedName("polar-user-id")
-        val polarUserId: String,
-        @SerializedName("member-id")
-        val memberId: String,
-        @SerializedName("registration-date")
-        val registrationDate: String,
-        @SerializedName("first-name")
-        val firstName: String,
-        @SerializedName("last-name")
-        val lastName: String,
-        val birthdate: String,
-        val gender: String,
-        val weight: Float,
-        val height: Float,
-        val field: Array<UserExtraInfoResponse>
-)
+import reenit.accesslink.dataTypes.UserInfo
+import reenit.accesslink.dataTypes.UserResponse
 
 class User(val userInfo: UserInfo) {
     // 401: old token
