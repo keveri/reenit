@@ -1,12 +1,33 @@
-package reenit.accesslink
+package reenit.accesslink.dataTypes
 
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.result.Result
-import com.github.kittinunf.fuel.core.FuelError
-import com.github.kittinunf.fuel.gson.responseObject
 import com.google.gson.annotations.SerializedName
 
-data class UserInfo(
+data class UserExtraInfoResponse(
+        val value: String,
+        val index: Int,
+        val name: String
+)
+
+data class UserResponse(
+        @SerializedName("polar-user-id")
+        val polarUserId: String,
+        @SerializedName("member-id")
+        val memberId: String,
+        @SerializedName("registration-date")
+        val registrationDate: String,
+        @SerializedName("first-name")
+        val firstName: String,
+        @SerializedName("last-name")
+        val lastName: String,
+        val birthdate: String,
+        val gender: String,
+        val weight: Float,
+        val height: Float,
+        val field: Array<UserExtraInfoResponse>
+)
+
+
+data class ApiCredentials(
         val id: Int,
         val token: String
 )
@@ -51,24 +72,3 @@ data class TransactionLocation(
         @SerializedName("resource-url")
         val resourceUrl: String
 )
-
-fun createTransaction(userInfo: UserInfo): Result<TransactionLocation, FuelError> {
-    val path = "https://www.polaraccesslink.com/v3/users/${userInfo.id}/exercise-transactions"
-    val (_, response, result) =
-            Fuel.post(path)
-                    .appendHeader("Accept", "application/json;charset=UTF-8")
-                    .appendHeader("Authorization", "Basic ${userInfo.token}")
-                    .responseObject<TransactionLocation>()
-    println(response)
-    return result
-}
-
-fun listExercises(userInfo: UserInfo): Result<Exercises, FuelError> {
-    val (_, response, result) =
-            Fuel.get("https://www.polaraccesslink.com/v3/exercises")
-                    .appendHeader("Accept", "application/json;charset=UTF-8")
-                    .appendHeader("Authorization", "Basic ${userInfo.token}")
-                    .responseObject<Exercises>()
-    println(response)
-    return result
-}
