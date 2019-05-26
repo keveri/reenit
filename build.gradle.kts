@@ -8,6 +8,10 @@ plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
     id("org.jetbrains.kotlin.jvm").version("1.3.21")
 
+    // formatKotlin: format Kotlin source code according to ktlint rules or warn when auto-format not possible.
+    // lintKotlin: report Kotlin lint errors and by default fail the build.
+    id("org.jmailen.kotlinter").version("1.25.2")
+
     // Apply the application plugin to add support for building a CLI application.
     application
 }

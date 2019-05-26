@@ -9,7 +9,7 @@ import reenit.accesslink.dataTypes.Exercises
 import reenit.accesslink.dataTypes.TransactionLocation
 import reenit.accesslink.dataTypes.ApiCredentials
 
-class TrainingData(val apiCredentials: ApiCredentials){
+class TrainingData(val apiCredentials: ApiCredentials) {
     fun createTransaction(): Result<TransactionLocation, FuelError> {
         val path = "https://www.polaraccesslink.com/v3/users/${apiCredentials.id}/exercise-transactions"
         val (_, response, result) =

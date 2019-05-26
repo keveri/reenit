@@ -24,7 +24,7 @@ class User(val apiCredentials: ApiCredentials) {
     }
 
     fun info(): Result<UserResponse, FuelError> {
-        val (_ , _, result) =
+        val (_, _, result) =
                 Fuel.get("https://www.polaraccesslink.com/v3/users/${apiCredentials.id}")
                         .appendHeader("Authorization", "Basic ${apiCredentials.token}")
                         .appendHeader("Accept", "application/json")
@@ -32,7 +32,7 @@ class User(val apiCredentials: ApiCredentials) {
         return result
     }
 
-    //204: deleted
+    // 204: deleted
     fun delete() {
         val (_, response, result) =
                 Fuel.delete("https://www.polaraccesslink.com/v3/users/${apiCredentials.id}")
@@ -40,4 +40,3 @@ class User(val apiCredentials: ApiCredentials) {
                         .responseString()
     }
 }
-
