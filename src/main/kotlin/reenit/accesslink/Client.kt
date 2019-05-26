@@ -13,12 +13,12 @@ class Client(apiCredentials: ApiCredentials) {
 }
 
 fun main(args: Array<String>) {
-    val user_id    = Key("user.id", intType)
-    val user_token = Key("user.token", stringType)
-    val config     = ConfigurationProperties.fromFile(File("user-info.properties"))
-    val userInfo   = ApiCredentials(config[user_id], config[user_token])
+    val userId    = Key("user.id", intType)
+    val userToken = Key("user.token", stringType)
+    val config    = ConfigurationProperties.fromFile(File("user-info.properties"))
+    val apiCreds  = ApiCredentials(config[userId], config[userToken])
 
-    val client = Client(userInfo)
+    val client = Client(apiCreds)
 
     val userInfoResult = client.user.info()
     userInfoResult.map { println(it) }
