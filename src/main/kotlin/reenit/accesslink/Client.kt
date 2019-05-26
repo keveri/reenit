@@ -4,19 +4,19 @@ import com.github.kittinunf.result.map
 import com.natpryce.konfig.*
 import java.io.File
 
-import reenit.accesslink.dataTypes.UserInfo
+import reenit.accesslink.dataTypes.ApiCredentials
 import reenit.accesslink.endpoint.*
 
-class Client(val userInfo: UserInfo) {
-    val user: User = User(userInfo)
-    val trainingData: TrainingData = TrainingData(userInfo)
+class Client(apiCredentials: ApiCredentials) {
+    val user: User = User(apiCredentials)
+    val trainingData: TrainingData = TrainingData(apiCredentials)
 }
 
 fun main(args: Array<String>) {
     val user_id    = Key("user.id", intType)
     val user_token = Key("user.token", stringType)
     val config     = ConfigurationProperties.fromFile(File("user-info.properties"))
-    val userInfo   = UserInfo(config[user_id], config[user_token])
+    val userInfo   = ApiCredentials(config[user_id], config[user_token])
 
     val client = Client(userInfo)
 

@@ -27,7 +27,7 @@ data class UserResponse(
 )
 
 
-data class UserInfo(
+data class ApiCredentials(
         val id: Int,
         val token: String
 )

@@ -7,15 +7,15 @@ import com.github.kittinunf.fuel.gson.responseObject
 
 import reenit.accesslink.dataTypes.Exercises
 import reenit.accesslink.dataTypes.TransactionLocation
-import reenit.accesslink.dataTypes.UserInfo
+import reenit.accesslink.dataTypes.ApiCredentials
 
-class TrainingData(val userInfo: UserInfo){
+class TrainingData(val apiCredentials: ApiCredentials){
     fun createTransaction(): Result<TransactionLocation, FuelError> {
-        val path = "https://www.polaraccesslink.com/v3/users/${userInfo.id}/exercise-transactions"
+        val path = "https://www.polaraccesslink.com/v3/users/${apiCredentials.id}/exercise-transactions"
         val (_, response, result) =
                 Fuel.post(path)
                         .appendHeader("Accept", "application/json;charset=UTF-8")
-                        .appendHeader("Authorization", "Basic ${userInfo.token}")
+                        .appendHeader("Authorization", "Basic ${apiCredentials.token}")
                         .responseObject<TransactionLocation>()
         println(response)
         return result
@@ -25,7 +25,7 @@ class TrainingData(val userInfo: UserInfo){
         val (_, response, result) =
                 Fuel.get("https://www.polaraccesslink.com/v3/exercises")
                         .appendHeader("Accept", "application/json;charset=UTF-8")
-                        .appendHeader("Authorization", "Basic ${userInfo.token}")
+                        .appendHeader("Authorization", "Basic ${apiCredentials.token}")
                         .responseObject<Exercises>()
         println(response)
         return result
