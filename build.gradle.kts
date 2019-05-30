@@ -46,7 +46,7 @@ application {
 
 tasks {
     task("authorize", JavaExec::class) {
-        main = "reenit.AppKt"
+        main = "reenit.AuthorizeKt"
         classpath = sourceSets["main"].runtimeClasspath
     }
 }
